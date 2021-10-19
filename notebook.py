@@ -10,11 +10,11 @@ conn = sqlite3.connect("crm.db")
 c = conn.cursor()
 
 c.execute("""
-        CREATE TABLE if not exists cliente(
+        CREATE TABLE if not exists client(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre TEXT NOT NULL,
-            telefono TEXT NOT NULL,
-            empresa TEXT NOT NULL
+            name TEXT NOT NULL,
+            phone TEXT NOT NULL,
+            company TEXT NOT NULL
         );
 """)
 
@@ -32,6 +32,19 @@ btn.grid(column=0, row=0)
 
 btn_delete = Button(root, text='Delete client', command=deleteClient)
 btn_delete.grid(column=1, row=0)
+
+
+tree = ttk.Treeview(root)
+tree['columns'] = ('Name', 'Phone', 'Company')
+tree.column('#0', width=0, stretch=0)
+tree.column('Name')
+tree.column('Phone')
+tree.column('Company')
+
+tree.heading('Name', text='Name')
+tree.heading('Phone', text='Phone')
+tree.heading('Company', text='Company')
+tree.grid(column=0, row=1, columnspan=2)
 
 
 root.mainloop()
